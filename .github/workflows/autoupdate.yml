@@ -2,7 +2,7 @@ name: Auto Fetch Nodes
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # 每6小时运行一次
+    - cron: '0 */6 * * *' # 每6小时运行一次 (UTC时间，换算为北京时间是 08:00, 14:00, 20:00, 02:00)
   workflow_dispatch:
 
 jobs:
@@ -23,23 +23,31 @@ jobs:
       - name: Execute Web Scraper
         run: bun run begin
 
-      - name: 4.5 更新 README 时间戳
+      - name: 更新 README 时间戳
         run: |
-          # 1. 强制将服务器时区设置为北京时间（否则默认是UTC时间，会差8小时）
+          # 1. 设置时区为北京时间
           export TZ='Asia/Shanghai'
-          # 2. 获取当前时间并格式化
+          # 2. 获取当前时间
           CURRENT_TIME=$(date "+%Y-%m-%d %H:%M:%S")
           
-          # 3. 使用 sed 命令，自动寻找并删除 README 中包含“更新于”的旧行
-          sed -i '/更新于/d' README.md
-          
-          # 4. 在 README 的最末尾追加写入最新时间
-          echo -e "\n> ⏱️ 节点状态最后自动更新于 $CURRENT_TIME" >> README.md
+          # 3. 检查 README.md 中是否已经有“更新于”字样
+          if grep -q "节点状态最后自动更新于" README.md; then
+            # 如果有，直接整行替换，避免产生多余空行
+            sed -i "s/.*节点状态最后自动更新于.*/> ⏱️ 节点状态最后自动更新于 $CURRENT_TIME/" README.md
+          else
+            # 如果没有（比如第一次运行），则在末尾追加
+            echo "" >> README.md
+            echo "> ⏱️ 节点状态最后自动更新于 $CURRENT_TIME" >> README.md
+          fi
 
-      - name: Commit and Push Subscriptions
+      - name: Commit and Push Changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add data/
-          git commit -m "chore: 同步最新优化节点数据" || echo "No changes"
+          
+          # 【关键修复】把 README.md 也加进暂存区
+          git add data/ README.md
+          
+          # 如果文件有变化就 commit 并 push，没变化就跳过不报错
+          git commit -m "chore: 同步最新优化节点数据并更新时间" || echo "No changes to commit"
           git push
