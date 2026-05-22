@@ -11,3 +11,5 @@
 `https://raw.githubusercontent.com/jiuzhiecloud/free-sub/refs/heads/main/data/sub.yaml`
 
 更新于
+
+> ⏱️ 节点状态最后自动更新于 2026-05-22 21:13:10
