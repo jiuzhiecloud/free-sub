@@ -23,6 +23,19 @@ jobs:
       - name: Execute Web Scraper
         run: bun run begin
 
+      - name: 4.5 更新 README 时间戳
+        run: |
+          # 1. 强制将服务器时区设置为北京时间（否则默认是UTC时间，会差8小时）
+          export TZ='Asia/Shanghai'
+          # 2. 获取当前时间并格式化
+          CURRENT_TIME=$(date "+%Y-%m-%d %H:%M:%S")
+          
+          # 3. 使用 sed 命令，自动寻找并删除 README 中包含“更新于”的旧行
+          sed -i '/更新于/d' README.md
+          
+          # 4. 在 README 的最末尾追加写入最新时间
+          echo -e "\n> ⏱️ 节点状态最后自动更新于 $CURRENT_TIME" >> README.md
+
       - name: Commit and Push Subscriptions
         run: |
           git config --local user.email "action@github.com"
