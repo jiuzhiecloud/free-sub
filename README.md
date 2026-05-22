@@ -9,3 +9,5 @@
 
 **Clash 订阅：**
 `https://raw.githubusercontent.com/jiuzhiecloud/free-sub/refs/heads/main/data/sub.yaml`
+
+更新于
