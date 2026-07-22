@@ -14,7 +14,7 @@
 
 `https://raw.githubusercontent.com/jiuzhiecloud/nodesub/refs/heads/main/sub.txt`
 
-复制订阅地址后，在v2rayNG首页右上角“+”号，从剪贴板导入，会在首页自动添加一个“import sub”订阅组，点“三个点”，下拉菜单中更新一下即可使用。
+复制订阅地址后，在v2rayNG首页右上角“+”号，从剪贴板导入，会在首页自动添加一个“import sub”订阅组，点右上角“三个点”，下拉菜单中更新一下即可使用。部分节点需要自己再测试一下。
 
 更新于
 
