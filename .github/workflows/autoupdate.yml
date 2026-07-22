@@ -3,7 +3,7 @@ name: Auto Fetch Nodes
 on:
   schedule:
     - cron: '0 */6 * * *' # 每6小时运行一次 (UTC时间，换算为北京时间是 08:00, 14:00, 20:00, 02:00)
-  workflow_dispatch:
+  workflow_dispatch: # 允许手动在 Actions 页面触发执行
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
       - name: Execute Web Scraper
         run: bun run begin
 
-      - name: 更新 README 时间戳
+      - name: 更新 README 和 docs 时间戳
         run: |
           # 1. 设置时区为北京时间
           export TZ='Asia/Shanghai'
@@ -39,14 +39,17 @@ jobs:
             echo "" >> README.md
             echo "> ⏱️ 节点状态最后自动更新于 $CURRENT_TIME" >> README.md
           fi
+          
+          # 4. 将生成的 README.md 复制为 docs.md，确保两者内容完全同步以供 GitHub Pages 渲染
+          cp README.md docs.md
 
       - name: Commit and Push Changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # 【关键修复】把 README.md 也加进暂存区
-          git add data/ README.md
+          # 将抓取的数据、原始 README 以及同步的 docs.md 全部加入暂存区
+          git add data/ README.md docs.md
           
           # 如果文件有变化就 commit 并 push，没变化就跳过不报错
           git commit -m "chore: 同步最新优化节点数据并更新时间" || echo "No changes to commit"
