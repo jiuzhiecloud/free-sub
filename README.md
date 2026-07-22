@@ -9,6 +9,7 @@
 ## 订阅地址
 
 **V2ray / Xray 订阅：**
+
 `https://raw.githubusercontent.com/jiuzhiecloud/free-sub/refs/heads/main/data/sub.txt`
 
 `https://raw.githubusercontent.com/jiuzhiecloud/nodesub/refs/heads/main/sub.txt`
