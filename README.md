@@ -15,7 +15,6 @@
 `https://raw.githubusercontent.com/jiuzhiecloud/nodesub/refs/heads/main/sub.txt`
 
 [![下载软件](https://img.shields.io/badge/点击下载-brightgreen?style=for-the-badge&logo=android)](https://github.com/jiuzhiecloud/v2rayNG/releases/download/v2.2.6_custom_02/v2rayNG_2.2.6_arm64-v8a.apk)
-
 [![加入QQ群](https://img.shields.io/badge/🐧一键加群-12B7F5?style=for-the-badge&logo=tencent-qq&logoColor=white)](https://qm.qq.com/cgi-bin/qm/qr?k=pEVRR_CjLCyqEfCmlNlQ6DjaoJjJ1Up3&jump_from=webapi&authKey=wlQjbg3mlKICtYxL0wcYXA1AKt+tQBXSSMLcDqbbSJP3F2fo4gyWpREEtDaaSgpp)
 
 复制订阅地址后，在v2rayNG首页右上角“+”号，从剪贴板导入，会在首页自动添加一个“import sub”订阅组，点右上角“三个点”，下拉菜单中更新一下即可使用。部分节点需要自己再测试一下。
